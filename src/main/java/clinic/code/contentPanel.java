@@ -6,10 +6,12 @@ import javax.swing.*;
 
 public class contentPanel extends JPanel {
 
-    contentPanel() {
-        setLayout(new CardLayout());
-
-        add(new HomePanel(), BorderLayout.CENTER);
-    }
+//    JFrame frame;
+//    contentPanel(JFrame frame) {
+//        this.frame = frame;
+//        setLayout(new CardLayout());
+//
+//        add(new HomePanel(frame), BorderLayout.CENTER);
+//    }
 
 }

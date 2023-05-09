@@ -1,12 +1,18 @@
 package clinic.code;
 
 import javax.swing.*;
+
 import helpers.CustomBorder;
+import org.kordamp.ikonli.materialdesign.MaterialDesign;
+import org.kordamp.ikonli.swing.FontIcon;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class MyFrame extends JFrame {
+
+    JPanel headerPanel;
 
     JPanel sideBar;
     private JPanel menuPanel;
@@ -22,14 +28,43 @@ public class MyFrame extends JFrame {
 
         super("Clinic-Appointment");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setMinimumSize(new Dimension(1100, 600));
+        this.setMinimumSize(new Dimension(1200, 700));
         this.setLayout(new BorderLayout());
+//        this.setResizable(false);
 
         // this.setUndecorated(true);
 
         this.setLocationRelativeTo(null);
 
         sideBar = new JPanel();
+
+        //========================================
+        headerPanel = new JPanel(new BorderLayout());
+        headerPanel.setPreferredSize(new Dimension(80, 50));
+        JLabel closeButton = new JLabel();
+        FontIcon menuIcon = FontIcon.of(MaterialDesign.MDI_MENU);
+        menuIcon.setIconSize(40);
+        menuIcon.setIconColor(new Color(255, 255, 255));
+        closeButton.setHorizontalAlignment(SwingConstants.CENTER);
+        closeButton.setFocusable(false);
+        closeButton.setIcon(menuIcon);
+        closeButton.setPreferredSize(new Dimension(50, 35));
+        closeButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (sideBar.isVisible()) {
+                    sideBar.setVisible(false);
+                } else {
+                    sideBar.setVisible(true);
+                }
+
+            }
+        });
+//        closeButton.addActionListener(e -> {
+//        });
+        headerPanel.add(closeButton, BorderLayout.WEST);
+        //===================================
+        this.add(headerPanel, BorderLayout.NORTH);
 
         sideBar.setPreferredSize(new Dimension(300, 600));
         sideBar.setLayout(new BoxLayout(sideBar, BoxLayout.Y_AXIS));
@@ -45,10 +80,10 @@ public class MyFrame extends JFrame {
         contactButton = new JButton("Contact");
 
         menuPanel.add(homeButton);
+        menuPanel.add(aboutButton);
         menuPanel.add(departmentButton);
         menuPanel.add(doctorsButton);
         menuPanel.add(blogButton);
-        menuPanel.add(aboutButton);
         menuPanel.add(contactButton);
         sideBar.add(menuPanel);
 
@@ -59,11 +94,11 @@ public class MyFrame extends JFrame {
 
         // ============================================================================
         JPanel contentPanel = new JPanel(new CardLayout());
-        HomePanel homePanel = new HomePanel();
-        DepartmentPanel departmentPanel = new DepartmentPanel();
-        DoctorsPanel doctorsPanel = new DoctorsPanel();
+        HomePanel homePanel = new HomePanel(this);
+        DepartmentPanel departmentPanel = new DepartmentPanel(this);
+        DoctorsPanel doctorsPanel = new DoctorsPanel(this);
         BlogPanel blogPanel = new BlogPanel();
-        AboutPanel aboutPanel = new AboutPanel();
+        AboutPanel aboutPanel = new AboutPanel(this);
         ContactPanel contactPanel = new ContactPanel();
 
         contentPanel.add(homePanel);
@@ -143,8 +178,9 @@ public class MyFrame extends JFrame {
             }
         });
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        this.pack();
+//        this.pack();
         this.setVisible(true);
     }
+
 
 }
