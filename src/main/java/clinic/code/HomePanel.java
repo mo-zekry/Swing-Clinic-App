@@ -60,6 +60,9 @@ public class HomePanel extends JPanel {
         cardsPanel.add(card4);
 
         JScrollPane scrollPane = new JScrollPane(cardsPanel);
+        JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();
+        verticalScrollBar.setUnitIncrement(20);
+        verticalScrollBar.setBlockIncrement(100);
 
         add(scrollPane, BorderLayout.CENTER);
 
@@ -75,7 +78,7 @@ public class HomePanel extends JPanel {
     }
 
     private JPanel createCard(String serviceName, String serviceDescription, ImageIcon image) {
-        // Create a JPanel with a border and a modern card layout
+
         JPanel card = new JPanel();
         JLabel serviceNameLabel = new JLabel(serviceName);
         JTextArea serviceDescriptionArea = new JTextArea(serviceDescription);
@@ -118,8 +121,6 @@ public class HomePanel extends JPanel {
         serviceDescriptionArea.setWrapStyleWord(true);
         serviceDescriptionArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // card.setBorder(BorderFactory.createLineBorder(new Color(17, 138, 148), 2,
-        // true));
         card.add(serviceDescriptionArea, BorderLayout.SOUTH);
         card.setBackground(new Color(59, 63, 79));
         card.setForeground(new Color(183, 183, 192));
@@ -130,18 +131,3 @@ public class HomePanel extends JPanel {
     }
 
 }
-// @Override
-// public void paintComponent(Graphics g) {
-// super.paintComponent(g);
-// Graphics2D g2d = (Graphics2D) g.create();
-
-// g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-// RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-
-// g2d.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), this);
-// g2d.setPaint(new Color(0, 0, 0, 200));
-// g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
-
-// // clean up
-// g2d.dispose();
-// }

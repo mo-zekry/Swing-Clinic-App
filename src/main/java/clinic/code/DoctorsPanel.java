@@ -40,7 +40,10 @@ public class DoctorsPanel extends JPanel {
                 "I am an ambitious workaholic, but apart from that, pretty simple pers",
                 new ImageIcon("src/main/resources/img/doc_4.jpg")));
 
-        JScrollPane scrollPane = new JScrollPane(cardsPanel); // Wrap the cardsPanel in a JScrollPane
+        JScrollPane scrollPane = new JScrollPane(cardsPanel);
+        JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();
+        verticalScrollBar.setUnitIncrement(20);
+        verticalScrollBar.setBlockIncrement(100);
 
         this.add(scrollPane, BorderLayout.CENTER);
 
@@ -152,6 +155,7 @@ public class DoctorsPanel extends JPanel {
                 // Implement mouse exit behavior if needed
             }
         });
+
 
         return card;
     }
