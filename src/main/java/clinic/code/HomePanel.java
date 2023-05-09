@@ -54,11 +54,14 @@ public class HomePanel extends JPanel {
 
         cardsPanel.setLayout(new GridLayout(2, 2, 5, 5));
         System.out.println(frame.getWidth());
-        add(cardsPanel, BorderLayout.CENTER);
         cardsPanel.add(card1);
         cardsPanel.add(card2);
         cardsPanel.add(card3);
         cardsPanel.add(card4);
+
+        JScrollPane scrollPane = new JScrollPane(cardsPanel);
+
+        add(scrollPane, BorderLayout.CENTER);
 
         addComponentListener(new ComponentAdapter() {
             @Override
@@ -120,6 +123,7 @@ public class HomePanel extends JPanel {
         card.add(serviceDescriptionArea, BorderLayout.SOUTH);
         card.setBackground(new Color(59, 63, 79));
         card.setForeground(new Color(183, 183, 192));
+        card.setPreferredSize(new Dimension(300, 400));
         serviceDescriptionArea.setForeground(new Color(183, 183, 192));
         serviceNameLabel.setForeground(new Color(183, 183, 192));
         return card;
