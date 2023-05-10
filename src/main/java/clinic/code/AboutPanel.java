@@ -20,16 +20,11 @@ public class AboutPanel extends JPanel {
 
         JPanel descriptionPanel = new JPanel(new BorderLayout());
         descriptionPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        JTextArea description = new JTextArea();
-        description.setText(lorem);
-        description.setAlignmentX(SwingConstants.CENTER);
-        description.setWrapStyleWord(true);
-        description.setLineWrap(true);
-        description.setEditable(false);
-        description.setFocusable(false);
-        description.setFont(new Font("", Font.PLAIN, 16));
+        JLabel description = new JLabel();
+        description.setText("<html><body style='text-align: center; font-size: 15'> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum a lectus fermentum venenatis sapien a, dignissim magna. Morbi nec turpis felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed et ex euismod,malesuada tortor et, tincidunt nulla.  Aenean et placerat leo, non suscipit massa. Nullam in dolor gravida, venenatis enim et, cursus turpis. Integer cursus scelerisque dui, eget cursus tellus tincidunt nec.</body></html>");
 
         JLabel descriptionLabel = new JLabel("About Us And Clinic Gallery");
+        descriptionLabel.setHorizontalAlignment(JLabel.CENTER);
         descriptionLabel.setFont(new Font("", Font.PLAIN, 30));
 
 

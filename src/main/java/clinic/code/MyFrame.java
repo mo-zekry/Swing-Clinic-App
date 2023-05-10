@@ -30,7 +30,7 @@ public class MyFrame extends JFrame {
 
         super("Clinic-Appointment");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setMinimumSize(new Dimension(1200, 700));
+        this.setMinimumSize(new Dimension(1200, 750));
         this.setLayout(new BorderLayout());
 //        this.setResizable(false);
 
@@ -62,27 +62,27 @@ public class MyFrame extends JFrame {
         menuPanel.setLayout(new GridLayout(6, 1, 0, 0));
 
         homeBtn = new JButton("Home");
-        homeBtn.setFont(new Font("", Font.TRUETYPE_FONT, 18));
+        homeBtn.setFont(new Font("", Font.PLAIN, 18));
 //        homeBtn.setBorder(null);
 //        homeBtn.setMargin(null);
         departmentBtn = new JButton("Department");
-        departmentBtn.setFont(new Font("", Font.TRUETYPE_FONT, 18));
+        departmentBtn.setFont(new Font("", Font.PLAIN, 18));
 //        departmentBtn.setBorder(null);
 //        departmentBtn.setMargin(null);
         doctorsBtn = new JButton("Doctors");
-        doctorsBtn.setFont(new Font("", Font.TRUETYPE_FONT, 18));
+        doctorsBtn.setFont(new Font("", Font.PLAIN, 18));
 //        doctorsBtn.setBorder(null);
 //        doctorsBtn.setMargin(null);
         blogBtn = new JButton("Blog");
-        blogBtn.setFont(new Font("", Font.TRUETYPE_FONT, 18));
+        blogBtn.setFont(new Font("", Font.PLAIN, 18));
 //        blogBtn.setBorder(null);
 //        blogBtn.setMargin(null);
         aboutBtn = new JButton("About");
-        aboutBtn.setFont(new Font("", Font.TRUETYPE_FONT, 18));
+        aboutBtn.setFont(new Font("", Font.PLAIN, 18));
 //        aboutBtn.setBorder(null);
 //        aboutBtn.setMargin(null);
         contactBtn = new JButton("Contact");
-        contactBtn.setFont(new Font("", Font.TRUETYPE_FONT, 18));
+        contactBtn.setFont(new Font("", Font.PLAIN, 18));
 //        contactBtn.setBorder(null);
 //        contactBtn.setMargin(null);
         expandBtn.addMouseListener(new MouseAdapter() {
