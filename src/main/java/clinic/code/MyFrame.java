@@ -2,8 +2,7 @@ package clinic.code;
 
 import javax.swing.*;
 
-import helpers.CustomBorder;
-import org.intellij.lang.annotations.JdkConstants;
+import net.miginfocom.swing.MigLayout;
 import org.kordamp.ikonli.elusive.Elusive;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 import org.kordamp.ikonli.swing.FontIcon;
@@ -30,7 +29,7 @@ public class MyFrame extends JFrame {
 
         super("Clinic-Appointment");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setMinimumSize(new Dimension(1200, 750));
+        this.setMinimumSize(new Dimension(1300, 750));
         this.setLayout(new BorderLayout());
 //        this.setResizable(false);
 
@@ -47,6 +46,7 @@ public class MyFrame extends JFrame {
         menuIcon.setIconSize(40);
         menuIcon.setIconColor(new Color(255, 255, 255));
         expandBtn.setHorizontalAlignment(SwingConstants.CENTER);
+        expandBtn.setBorder(BorderFactory.createEmptyBorder(0, 12, 0, 0));
         expandBtn.setFocusable(false);
         expandBtn.setIcon(menuIcon);
         expandBtn.setPreferredSize(new Dimension(50, 35));
@@ -56,13 +56,15 @@ public class MyFrame extends JFrame {
         this.add(headerPanel, BorderLayout.NORTH);
 
         sideBar.setPreferredSize(new Dimension(300, 600));
-        sideBar.setLayout(new BoxLayout(sideBar, BoxLayout.Y_AXIS));
+        sideBar.setLayout(new BorderLayout());
+        sideBar.setBackground(new Color(23, 59, 61));
         menuPanel = new JPanel();
 //        sideBar.setBorder(new CustomBorder(1, Color.WHITE, false, false, false, true, false));
-        menuPanel.setLayout(new GridLayout(6, 1, 0, 0));
+        menuPanel.setLayout(new MigLayout(" fillx, align center,aligny top "));
 
         homeBtn = new JButton("Home");
         homeBtn.setFont(new Font("", Font.PLAIN, 18));
+//        homeBtn.setMinimumSize(new Dimension(300, 50));
 //        homeBtn.setBorder(null);
 //        homeBtn.setMargin(null);
         departmentBtn = new JButton("Department");
@@ -85,6 +87,16 @@ public class MyFrame extends JFrame {
         contactBtn.setFont(new Font("", Font.PLAIN, 18));
 //        contactBtn.setBorder(null);
 //        contactBtn.setMargin(null);
+
+        settingsPanel = new JPanel(new MigLayout(" fillx, align center"));
+        settingsPanel.setPreferredSize(new Dimension(50, 20));
+        JButton settingsBtn = new JButton("Settings");
+        settingsBtn.setFont(new Font("", Font.PLAIN, 18));
+        settingsPanel.setPreferredSize(new Dimension(300, 100));
+        settingsPanel.add(settingsBtn, "grow, hmax 50, hmin 50");
+        sideBar.add(settingsPanel, BorderLayout.SOUTH);
+
+
         expandBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -113,6 +125,10 @@ public class MyFrame extends JFrame {
                     FontIcon contactIcon = FontIcon.of(MaterialDesign.MDI_CONTACT_MAIL, 40, new Color(198, 215, 231));
                     contactBtn.setIcon(contactIcon);
 
+                    FontIcon settingsIcon = FontIcon.of(MaterialDesign.MDI_SETTINGS, 40, new Color(198, 215, 231));
+                    settingsBtn.setText("");
+                    settingsBtn.setIcon(settingsIcon);
+
                     sideBar.setPreferredSize(new Dimension(70, 600));
 
 
@@ -135,6 +151,9 @@ public class MyFrame extends JFrame {
                     blogBtn.setText("Blog");
                     blogBtn.setIcon(null);
 
+                    settingsBtn.setText("Settings");
+                    settingsBtn.setIcon(null);
+
                     sideBar.setPreferredSize(new Dimension(300, 600));
 
                 }
@@ -142,18 +161,13 @@ public class MyFrame extends JFrame {
             }
         });
 
-        menuPanel.add(homeBtn);
-        menuPanel.add(aboutBtn);
-        menuPanel.add(departmentBtn);
-        menuPanel.add(doctorsBtn);
-        menuPanel.add(blogBtn);
-        menuPanel.add(contactBtn);
-        sideBar.add(menuPanel);
-
-        settingsPanel = new JPanel();
-        settingsPanel.setPreferredSize(new Dimension(300, 20));
-
-        sideBar.add(settingsPanel);
+        menuPanel.add(homeBtn, "wrap, grow, align center, hmax 70, hmin 50");
+        menuPanel.add(aboutBtn, "wrap, grow, align center, hmax 70, hmin 50");
+        menuPanel.add(departmentBtn, "wrap, grow, align center, hmax 70, hmin 50");
+        menuPanel.add(doctorsBtn, "wrap, grow, align center, hmax 70, hmin 50");
+        menuPanel.add(blogBtn, "wrap, grow, align center, hmax 70, hmin 50");
+        menuPanel.add(contactBtn, "wrap, grow, align center, hmax 70, hmin 50");
+        sideBar.add(menuPanel, BorderLayout.CENTER);
 
         // ============================================================================
         JPanel contentPanel = new JPanel(new CardLayout());

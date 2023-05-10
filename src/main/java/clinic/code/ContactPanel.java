@@ -5,6 +5,8 @@ import org.kordamp.ikonli.swing.FontIcon;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ContactPanel extends JPanel {
     JFrame frame;
@@ -31,7 +33,128 @@ public class ContactPanel extends JPanel {
 
         //=====================================================
 
+        JPanel form = new JPanel(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+//        c.weightx = 200;
+        c.insets = new Insets(10, 10, 10, 10);
+
+        JLabel firstNameLabel = new JLabel("First Name:");
+        firstNameLabel.setFont(new Font("", Font.PLAIN, 18));
+        JTextField firstNameField = new JTextField();
+        firstNameField.setPreferredSize(new Dimension(400, 40));
+        c.gridx = 0;
+        c.gridy = 0;
+        form.add(firstNameLabel, c);
+        c.gridx = 1;
+        c.gridy = 0;
+        form.add(firstNameField, c);
+
+        JLabel lastNameLabel = new JLabel("Last Name:");
+        lastNameLabel.setFont(new Font("", Font.PLAIN, 18));
+        JTextField lastNameField = new JTextField();
+        lastNameField.setPreferredSize(new Dimension(400, 40));
+        c.gridx = 0;
+        c.gridy = 1;
+        form.add(lastNameLabel, c);
+        c.gridx = 1;
+        c.gridy = 1;
+        form.add(lastNameField, c);
+
+        JLabel dateLabel = new JLabel("Date:");
+        dateLabel.setFont(new Font("", Font.PLAIN, 18));
+        JTextField dateField = new JTextField();
+        dateField.setPreferredSize(new Dimension(400, 40));
+        c.gridx = 0;
+        c.gridy = 2;
+        form.add(dateLabel, c);
+        c.gridx = 1;
+        c.gridy = 2;
+        form.add(dateField, c);
+
+        JLabel timeLabel = new JLabel("Time:");
+        timeLabel.setFont(new Font("", Font.PLAIN, 18));
+        JTextField timeField = new JTextField();
+        timeField.setPreferredSize(new Dimension(400, 40));
+        c.gridx = 0;
+        c.gridy = 3;
+        form.add(timeLabel, c);
+        c.gridx = 1;
+        c.gridy = 3;
+        form.add(timeField, c);
+
+        JLabel serviceLabel = new JLabel("Service Type:");
+        serviceLabel.setFont(new Font("", Font.PLAIN, 18));
+        String[] serviceTypes = {"Type 1", "Type 2", "Type 3"};
+        JComboBox<String> serviceComboBox = new JComboBox<>(serviceTypes);
+        serviceComboBox.setFont(new Font("", Font.PLAIN, 18));
+        c.gridx = 0;
+        c.gridy = 4;
+        form.add(serviceLabel, c);
+        c.gridx = 1;
+        c.gridy = 4;
+        form.add(serviceComboBox, c);
+
+        JLabel genderLabel = new JLabel("Gender:");
+        genderLabel.setFont(new Font("", Font.PLAIN, 18));
+
+        JRadioButton maleRadioButton = new JRadioButton("Male");
+        maleRadioButton.setFont(new Font("", Font.PLAIN, 18));
+        JRadioButton femaleRadioButton = new JRadioButton("Female");
+        femaleRadioButton.setFont(new Font("", Font.PLAIN, 18));
+
+        ButtonGroup genderButtonGroup = new ButtonGroup();
+        genderButtonGroup.add(maleRadioButton);
+        genderButtonGroup.add(femaleRadioButton);
+
+        c.gridx = 0;
+        c.gridy = 5;
+        form.add(genderLabel, c);
+        c.gridx = 1;
+        c.gridy = 5;
+        form.add(maleRadioButton, c);
+        c.gridx = 1;
+        c.gridy = 6;
+        form.add(femaleRadioButton, c);
+
+        JButton submitBtn = new JButton("Submit");
+        submitBtn.setFont(new Font("", Font.PLAIN, 18));
+        c.gridx = 1;
+        c.gridy = 7;
+//        c.fill = GridBagConstraints.NONE;
+        c.gridwidth = 1;
+//        c.anchor = GridBagConstraints.CENTER;
+        form.add(submitBtn, c);
+
+        submitBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String firstName = firstNameField.getText();
+                String lastName = lastNameField.getText();
+                String date = dateField.getText();
+                String time = timeField.getText();
+                String serviceType = (String) serviceComboBox.getSelectedItem();
+                String gender = maleRadioButton.isSelected() ? "Male" : "Female";
+
+                // Perform actions with the form data
+                System.out.println("First Name: " + firstName);
+                System.out.println("Last Name: " + lastName);
+                System.out.println("Date: " + date);
+                System.out.println("Time: " + time);
+                System.out.println("Service Type: " + serviceType);
+                System.out.println("Gender: " + gender);
+                // Reset the form fields
+                firstNameField.setText("");
+                lastNameField.setText("");
+                dateField.setText("");
+                timeField.setText("");
+                serviceComboBox.setSelectedIndex(0);
+                genderButtonGroup.clearSelection();
+            }
+        });
+
         add(contactWays, BorderLayout.NORTH);
+        add(form, BorderLayout.CENTER);
     }
 
     private JPanel createCard(FontIcon icon, String name, String description) {
@@ -83,5 +206,4 @@ public class ContactPanel extends JPanel {
 
         return card;
     }
-
 }

@@ -51,7 +51,7 @@ public class DoctorsPanel extends JPanel {
             @Override
             public void componentResized(ComponentEvent e) {
                 int width = getWidth();
-                int columns = width >= 900 ? 3 : 2;
+                int columns = width >= 100 ? 3 : 2;
                 cardsPanel.setLayout(new GridLayout(0, columns, 5, 5));
                 revalidate();
             }
