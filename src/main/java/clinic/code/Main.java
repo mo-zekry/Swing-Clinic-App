@@ -1,7 +1,6 @@
 package clinic.code;
 
 import com.formdev.flatlaf.intellijthemes.FlatNordIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneDarkIJTheme;
 
 import javax.swing.*;
 
