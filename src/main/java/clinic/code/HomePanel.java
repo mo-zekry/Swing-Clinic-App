@@ -35,7 +35,7 @@ public class HomePanel extends JPanel {
         JPanel card3 = createCard("24 Hours Service", lorem,
                 new ImageIcon("src/main/resources/img/home_3.jpg"));
         JPanel card4 = createCard("Qualified Doctors", lorem,
-                new ImageIcon("src/main/resources/img/ximage_5.jpg.pagespeed.ic.IaTxArRsR-.jpg"));
+                new ImageIcon("src/main/resources/img/doc_3.jpg"));
 
         // Add the cards to the HomePanel
         JPanel welcomePanel = new JPanel();
