@@ -1,13 +1,10 @@
 package clinic.code;
 
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 import javax.swing.*;
 
 import net.miginfocom.swing.MigLayout;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 import org.kordamp.ikonli.medicons.Medicons;
 import org.kordamp.ikonli.swing.FontIcon;
 

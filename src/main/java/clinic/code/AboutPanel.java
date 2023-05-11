@@ -6,9 +6,6 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * The type About panel.
- */
 public class AboutPanel extends JPanel {
 
     String lorem = """

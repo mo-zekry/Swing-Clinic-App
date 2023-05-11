@@ -43,6 +43,17 @@
 
 
         <dependency>
+            <groupId>no.tornado.databinding</groupId>
+            <artifactId>jxdatepicker-support</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.lgooddatepicker</groupId>
+            <artifactId>LGoodDatePicker</artifactId>
+            <version>11.2.1</version>
+        </dependency>
+
+        <dependency>
             <groupId>net.imagej</groupId>
             <artifactId>ij</artifactId>
             <version>1.54d</version>

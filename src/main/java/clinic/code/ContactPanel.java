@@ -1,12 +1,18 @@
 package clinic.code;
 
+import com.github.lgooddatepicker.components.DatePicker;
+import org.jdesktop.swingx.JXDatePicker;
+
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 import org.kordamp.ikonli.swing.FontIcon;
+import org.jdesktop.swingx.JXDatePicker;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.Date;
 
 public class ContactPanel extends JPanel {
     JFrame frame;
@@ -33,10 +39,15 @@ public class ContactPanel extends JPanel {
 
         //=====================================================
 
+        JPanel containerPanel = new JPanel();
+        JPanel emptyPanel_1 = new JPanel();
+        JPanel emptyPanel_2 = new JPanel();
+
         JPanel form = new JPanel(new GridBagLayout());
+
+
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
-//        c.weightx = 200;
         c.insets = new Insets(10, 10, 10, 10);
 
         JLabel firstNameLabel = new JLabel("First Name:");
@@ -63,25 +74,41 @@ public class ContactPanel extends JPanel {
 
         JLabel dateLabel = new JLabel("Date:");
         dateLabel.setFont(new Font("", Font.PLAIN, 18));
-        JTextField dateField = new JTextField();
-        dateField.setPreferredSize(new Dimension(400, 40));
+
+//        JXDatePicker datePicker = new JXDatePicker();
+//        UIDefaults uiDefaults = UIManager.getDefaults();
+//        uiDefaults.put("JXMonthView.background", Color.LIGHT_GRAY); // Set background color of the date chooser menu
+
+        DatePicker data = new DatePicker();
+        data.setPreferredSize(new Dimension(400, 40));
         c.gridx = 0;
         c.gridy = 2;
         form.add(dateLabel, c);
         c.gridx = 1;
         c.gridy = 2;
-        form.add(dateField, c);
+        form.add(data, c);
 
         JLabel timeLabel = new JLabel("Time:");
         timeLabel.setFont(new Font("", Font.PLAIN, 18));
-        JTextField timeField = new JTextField();
-        timeField.setPreferredSize(new Dimension(400, 40));
+
+        SpinnerDateModel timeModel = new SpinnerDateModel();
+        JSpinner timeSpinner = new JSpinner(timeModel);
+        JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(timeSpinner, "HH:mm");
+        timeSpinner.setEditor(timeEditor);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        timeModel.setValue(calendar.getTime());
+
+//        JTextField timeField = new JTextField();
+
+        timeSpinner.setPreferredSize(new Dimension(400, 40));
         c.gridx = 0;
         c.gridy = 3;
         form.add(timeLabel, c);
         c.gridx = 1;
         c.gridy = 3;
-        form.add(timeField, c);
+        form.add(timeSpinner, c);
 
         JLabel serviceLabel = new JLabel("Service Type:");
         serviceLabel.setFont(new Font("", Font.PLAIN, 18));
@@ -121,9 +148,7 @@ public class ContactPanel extends JPanel {
         submitBtn.setFont(new Font("", Font.PLAIN, 18));
         c.gridx = 1;
         c.gridy = 7;
-//        c.fill = GridBagConstraints.NONE;
         c.gridwidth = 1;
-//        c.anchor = GridBagConstraints.CENTER;
         form.add(submitBtn, c);
 
         submitBtn.addActionListener(new ActionListener() {
@@ -131,9 +156,9 @@ public class ContactPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String firstName = firstNameField.getText();
                 String lastName = lastNameField.getText();
-                String date = dateField.getText();
-                String time = timeField.getText();
-                String serviceType = (String) serviceComboBox.getSelectedItem();
+                String date = data.getText();
+                String time = timeSpinner.getValue().toString();
+                String serviceType = serviceComboBox.getSelectedItem().toString();
                 String gender = maleRadioButton.isSelected() ? "Male" : "Female";
 
                 // Perform actions with the form data
@@ -146,15 +171,20 @@ public class ContactPanel extends JPanel {
                 // Reset the form fields
                 firstNameField.setText("");
                 lastNameField.setText("");
-                dateField.setText("");
-                timeField.setText("");
+                data.setText("");
+                timeModel.setValue(calendar.getTime());
                 serviceComboBox.setSelectedIndex(0);
                 genderButtonGroup.clearSelection();
             }
         });
 
+
+        containerPanel.add(emptyPanel_1, BorderLayout.EAST);
+        containerPanel.add(form, BorderLayout.CENTER);
+        containerPanel.add(emptyPanel_2, BorderLayout.EAST);
+
         add(contactWays, BorderLayout.NORTH);
-        add(form, BorderLayout.CENTER);
+        add(containerPanel, BorderLayout.CENTER);
     }
 
     private JPanel createCard(FontIcon icon, String name, String description) {
@@ -179,19 +209,15 @@ public class ContactPanel extends JPanel {
 
         // Panel for the contact name
         JPanel namePanel = new JPanel();
-//        namePanel.setBackground(Color.white);
         namePanel.setBackground(new Color(59, 63, 79));
         JLabel nameLabel = new JLabel(name);
-//        nameLabel.setForeground(new Color(0, 0, 0));
         nameLabel.setFont(nameLabel.getFont().deriveFont(Font.BOLD, 18f));
         namePanel.add(nameLabel);
 
         // Panel for the description
         JPanel descriptionPanel = new JPanel(new BorderLayout());
-//        descriptionPanel.setBackground(Color.white);
         descriptionPanel.setBackground(new Color(59, 63, 79));
         JTextArea descriptionArea = new JTextArea(description);
-//        descriptionArea.setForeground(new Color(0, 0, 0));
         descriptionArea.setFont(nameLabel.getFont().deriveFont(Font.BOLD, 14f));
         descriptionArea.setLineWrap(true);
         descriptionArea.setWrapStyleWord(true);

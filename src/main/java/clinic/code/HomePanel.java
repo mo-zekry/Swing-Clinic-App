@@ -3,7 +3,6 @@ package clinic.code;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import helpers.AppColors;
 import helpers.FoldingCube;
 import helpers.PaintImage;
 
@@ -14,7 +13,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class HomePanel extends JPanel {
-    Image image;
     String lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
             "Praesent tincidunt justo sed luctus bibendum." +
             "Praesent tincidunt justo sed luctus bibendum.";

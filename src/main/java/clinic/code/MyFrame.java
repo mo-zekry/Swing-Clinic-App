@@ -31,9 +31,6 @@ public class MyFrame extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setMinimumSize(new Dimension(1300, 750));
         this.setLayout(new BorderLayout());
-//        this.setResizable(false);
-
-        // this.setUndecorated(true);
 
         this.setLocationRelativeTo(null);
 
@@ -58,6 +55,7 @@ public class MyFrame extends JFrame {
         sideBar.setPreferredSize(new Dimension(300, 600));
         sideBar.setLayout(new BorderLayout());
         sideBar.setBackground(new Color(23, 59, 61));
+//        sideBar.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255), 1));
         menuPanel = new JPanel();
 //        sideBar.setBorder(new CustomBorder(1, Color.WHITE, false, false, false, true, false));
         menuPanel.setLayout(new MigLayout(" fillx, align center,aligny top "));
@@ -177,6 +175,7 @@ public class MyFrame extends JFrame {
         BlogPanel blogPanel = new BlogPanel();
         AboutPanel aboutPanel = new AboutPanel(this);
         ContactPanel contactPanel = new ContactPanel(this);
+//        contactPanel.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255), 3));
 
         contentPanel.add(homePanel);
         contentPanel.add(departmentPanel);

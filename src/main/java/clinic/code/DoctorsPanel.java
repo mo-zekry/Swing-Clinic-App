@@ -2,7 +2,6 @@ package clinic.code;
 
 import helpers.PaintImage;
 import net.miginfocom.swing.MigLayout;
-//import org.kordamp.ikonli.materialdesign.*;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 import org.kordamp.ikonli.swing.FontIcon;
 
