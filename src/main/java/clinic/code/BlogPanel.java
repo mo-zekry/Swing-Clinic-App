@@ -13,7 +13,7 @@ public class BlogPanel extends JPanel {
         setLayout(new BorderLayout());
 
         JPanel head = new JPanel();
-        head.setLayout(new MigLayout("debug, fill"));
+        head.setLayout(new MigLayout(" fill"));
 
         JLabel headLabel = new JLabel("<html><body style='text-align: center; font-size: 24; font-weight: 800;'> Gets Every Single Updates Here</body></html>");
         JLabel description = new JLabel("<html><body style='text-align: center; font-size: 15'> Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</body></html>");
@@ -24,7 +24,7 @@ public class BlogPanel extends JPanel {
         add(head, BorderLayout.NORTH);
         //================================================
 
-        JPanel cardsPanel = new JPanel(new MigLayout("debug, fill"));
+        JPanel cardsPanel = new JPanel(new MigLayout(" fill"));
 
         cardsPanel.add(createCard(new ImageIcon("src/main/resources/img/blog_1.jpg"), "Scary Thing That You Don’t Get Enough Sleep", "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts."), "grow");
 
@@ -43,16 +43,16 @@ public class BlogPanel extends JPanel {
     }
 
     private JPanel createCard(ImageIcon image, String head, String description) {
-        JPanel card = new JPanel(new MigLayout("debug"));
+        JPanel card = new JPanel(new MigLayout());
 
         PaintImage cardImage = new PaintImage(image.getImage());
         card.add(cardImage, "wrap, align center, grow, push");
 
-        JPanel infoPanel = new JPanel(new MigLayout("debug"));
+        JPanel infoPanel = new JPanel(new MigLayout());
 
         JLabel date = new JLabel("JANE 9, 2023");
         JLabel access = new JLabel("ADMIN");
-        FontIcon icon = FontIcon.of(MaterialDesign.MDI_MESSAGE, 15, new Color(1, 1, 1));
+        FontIcon icon = FontIcon.of(MaterialDesign.MDI_MESSAGE, 15, new Color(255, 255, 255));
         JLabel messages = new JLabel("5", icon, JLabel.CENTER);
 
         infoPanel.add(date);
@@ -61,7 +61,7 @@ public class BlogPanel extends JPanel {
 
         card.add(infoPanel, "wrap");
 
-        JLabel subject = new JLabel(head);
+        JLabel subject = new JLabel("<html><body>" + head + "</body></html>");
         JLabel descriptionLabel = new JLabel("<html><body>" + description + "</body></html>");
 
         card.add(subject, "wrap");
