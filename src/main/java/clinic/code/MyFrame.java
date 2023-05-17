@@ -24,10 +24,18 @@ public class MyFrame extends JFrame {
     private JButton aboutBtn;
     private JButton contactBtn;
     private JPanel settingsPanel;
+    private JButton settingsBtn;
+
+    private JPanel contentPanel;
 
     public MyFrame() {
-
         super("Clinic-Appointment");
+        initComponent();
+    }
+
+
+    private void initComponent() {
+
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setMinimumSize(new Dimension(1300, 750));
         this.setLayout(new BorderLayout());
@@ -50,110 +58,49 @@ public class MyFrame extends JFrame {
         expandBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         headerPanel.add(expandBtn, BorderLayout.WEST);
         //===================================
-        this.add(headerPanel, BorderLayout.NORTH);
+        this.getContentPane().add(headerPanel, BorderLayout.NORTH);
 
-        sideBar.setPreferredSize(new Dimension(300, 600));
+        sideBar.setPreferredSize(new Dimension(70, 600));
         sideBar.setLayout(new BorderLayout());
-        sideBar.setBackground(new Color(23, 59, 61));
-//        sideBar.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255), 1));
+        sideBar.setBackground(new Color(38, 55, 56));
         menuPanel = new JPanel();
-//        sideBar.setBorder(new CustomBorder(1, Color.WHITE, false, false, false, true, false));
         menuPanel.setLayout(new MigLayout(" fillx, align center,aligny top "));
 
-        homeBtn = new JButton("Home");
+        homeBtn = new JButton();
         homeBtn.setFont(new Font("", Font.PLAIN, 18));
-//        homeBtn.setMinimumSize(new Dimension(300, 50));
-//        homeBtn.setBorder(null);
-//        homeBtn.setMargin(null);
-        departmentBtn = new JButton("Department");
+
+        departmentBtn = new JButton();
         departmentBtn.setFont(new Font("", Font.PLAIN, 18));
-//        departmentBtn.setBorder(null);
-//        departmentBtn.setMargin(null);
-        doctorsBtn = new JButton("Doctors");
+
+        doctorsBtn = new JButton();
         doctorsBtn.setFont(new Font("", Font.PLAIN, 18));
-//        doctorsBtn.setBorder(null);
-//        doctorsBtn.setMargin(null);
-        blogBtn = new JButton("Blog");
+
+        blogBtn = new JButton();
         blogBtn.setFont(new Font("", Font.PLAIN, 18));
-//        blogBtn.setBorder(null);
-//        blogBtn.setMargin(null);
-        aboutBtn = new JButton("About");
+
+        aboutBtn = new JButton();
         aboutBtn.setFont(new Font("", Font.PLAIN, 18));
-//        aboutBtn.setBorder(null);
-//        aboutBtn.setMargin(null);
-        contactBtn = new JButton("Contact");
+
+        contactBtn = new JButton();
         contactBtn.setFont(new Font("", Font.PLAIN, 18));
-//        contactBtn.setBorder(null);
-//        contactBtn.setMargin(null);
 
         settingsPanel = new JPanel(new MigLayout(" fillx, align center"));
         settingsPanel.setPreferredSize(new Dimension(50, 20));
-        JButton settingsBtn = new JButton("Settings");
+        settingsBtn = new JButton();
         settingsBtn.setFont(new Font("", Font.PLAIN, 18));
         settingsPanel.setPreferredSize(new Dimension(300, 100));
         settingsPanel.add(settingsBtn, "grow, hmax 50, hmin 50");
         sideBar.add(settingsPanel, BorderLayout.SOUTH);
 
+        iconSidebar();
 
         expandBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (homeBtn.getText() == "Home") {
-                    homeBtn.setText("");
-                    FontIcon homeIcon = FontIcon.of(MaterialDesign.MDI_HOME, 40, new Color(198, 215, 231));
-                    homeBtn.setIcon(homeIcon);
-
-                    aboutBtn.setText("");
-                    FontIcon aboutIcon = FontIcon.of(MaterialDesign.MDI_INFORMATION, 40, new Color(198, 215, 231));
-                    aboutBtn.setIcon(aboutIcon);
-
-                    doctorsBtn.setText("");
-                    FontIcon doctorIcon = FontIcon.of(Elusive.GROUP, 40, new Color(198, 215, 231));
-                    doctorsBtn.setIcon(doctorIcon);
-
-                    departmentBtn.setText("");
-                    FontIcon departmentIcon = FontIcon.of(Elusive.TH, 40, new Color(198, 215, 231));
-                    departmentBtn.setIcon(departmentIcon);
-
-                    blogBtn.setText("");
-                    FontIcon blogIcon = FontIcon.of(Elusive.BLOGGER, 40, new Color(198, 215, 231));
-                    blogBtn.setIcon(blogIcon);
-
-                    contactBtn.setText("");
-                    FontIcon contactIcon = FontIcon.of(MaterialDesign.MDI_CONTACT_MAIL, 40, new Color(198, 215, 231));
-                    contactBtn.setIcon(contactIcon);
-
-                    FontIcon settingsIcon = FontIcon.of(MaterialDesign.MDI_SETTINGS, 40, new Color(198, 215, 231));
-                    settingsBtn.setText("");
-                    settingsBtn.setIcon(settingsIcon);
-
-                    sideBar.setPreferredSize(new Dimension(70, 600));
-
-
+                if (homeBtn.getText() == "") {
+                    btnSideBar();
                 } else {
-                    homeBtn.setText("Home");
-                    homeBtn.setIcon(null);
-
-                    aboutBtn.setText("About");
-                    aboutBtn.setIcon(null);
-
-                    departmentBtn.setText("Department");
-                    departmentBtn.setIcon(null);
-
-                    doctorsBtn.setText("Doctors");
-                    doctorsBtn.setIcon(null);
-
-                    contactBtn.setText("Contact");
-                    contactBtn.setIcon(null);
-
-                    blogBtn.setText("Blog");
-                    blogBtn.setIcon(null);
-
-                    settingsBtn.setText("Settings");
-                    settingsBtn.setIcon(null);
-
-                    sideBar.setPreferredSize(new Dimension(300, 600));
-
+                    iconSidebar();
                 }
 
             }
@@ -168,14 +115,16 @@ public class MyFrame extends JFrame {
         sideBar.add(menuPanel, BorderLayout.CENTER);
 
         // ============================================================================
-        JPanel contentPanel = new JPanel(new CardLayout());
+        contentPanel = new JPanel(new CardLayout());
+
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
         HomePanel homePanel = new HomePanel(this);
         DepartmentPanel departmentPanel = new DepartmentPanel(this);
         DoctorsPanel doctorsPanel = new DoctorsPanel(this);
         BlogPanel blogPanel = new BlogPanel();
         AboutPanel aboutPanel = new AboutPanel(this);
         ContactPanel contactPanel = new ContactPanel(this);
-//        contactPanel.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255), 3));
 
         contentPanel.add(homePanel);
         contentPanel.add(departmentPanel);
@@ -184,8 +133,8 @@ public class MyFrame extends JFrame {
         contentPanel.add(aboutPanel);
         contentPanel.add(contactPanel);
 
-        this.add(sideBar, BorderLayout.WEST);
-        this.add(contentPanel, BorderLayout.CENTER);
+        this.getContentPane().add(sideBar, BorderLayout.WEST);
+        this.getContentPane().add(contentPanel, BorderLayout.CENTER);
 
         homeBtn.addMouseListener(new MouseAdapter() {
             @Override
@@ -253,10 +202,67 @@ public class MyFrame extends JFrame {
                 contactPanel.setVisible(true);
             }
         });
-        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//        this.pack();
+
         this.setVisible(true);
     }
 
+
+    private void iconSidebar() {
+        homeBtn.setText("");
+        FontIcon homeIcon = FontIcon.of(MaterialDesign.MDI_HOME, 40, new Color(198, 215, 231));
+        homeBtn.setIcon(homeIcon);
+
+        aboutBtn.setText("");
+        FontIcon aboutIcon = FontIcon.of(MaterialDesign.MDI_INFORMATION, 40, new Color(198, 215, 231));
+        aboutBtn.setIcon(aboutIcon);
+
+        doctorsBtn.setText("");
+        FontIcon doctorIcon = FontIcon.of(Elusive.GROUP, 40, new Color(198, 215, 231));
+        doctorsBtn.setIcon(doctorIcon);
+
+        departmentBtn.setText("");
+        FontIcon departmentIcon = FontIcon.of(Elusive.TH, 40, new Color(198, 215, 231));
+        departmentBtn.setIcon(departmentIcon);
+
+        blogBtn.setText("");
+        FontIcon blogIcon = FontIcon.of(Elusive.BLOGGER, 40, new Color(198, 215, 231));
+        blogBtn.setIcon(blogIcon);
+
+        contactBtn.setText("");
+        FontIcon contactIcon = FontIcon.of(MaterialDesign.MDI_CONTACT_MAIL, 40, new Color(198, 215, 231));
+        contactBtn.setIcon(contactIcon);
+
+        FontIcon settingsIcon = FontIcon.of(MaterialDesign.MDI_SETTINGS, 40, new Color(198, 215, 231));
+        settingsBtn.setText("");
+        settingsBtn.setIcon(settingsIcon);
+
+        sideBar.setPreferredSize(new Dimension(70, 600));
+
+    }
+
+    private void btnSideBar() {
+        homeBtn.setText("Home");
+        homeBtn.setIcon(null);
+
+        aboutBtn.setText("About");
+        aboutBtn.setIcon(null);
+
+        departmentBtn.setText("Department");
+        departmentBtn.setIcon(null);
+
+        doctorsBtn.setText("Doctors");
+        doctorsBtn.setIcon(null);
+
+        contactBtn.setText("Contact");
+        contactBtn.setIcon(null);
+
+        blogBtn.setText("Blog");
+        blogBtn.setIcon(null);
+
+        settingsBtn.setText("Settings");
+        settingsBtn.setIcon(null);
+
+        sideBar.setPreferredSize(new Dimension(300, 600));
+    }
 
 }

@@ -7,6 +7,8 @@ import org.kordamp.ikonli.swing.FontIcon;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class BlogPanel extends JPanel {
     public BlogPanel() {
@@ -61,7 +63,7 @@ public class BlogPanel extends JPanel {
 
         card.add(infoPanel, "wrap");
 
-        JLabel subject = new JLabel("<html><body>" + head + "</body></html>");
+        JLabel subject = new JLabel("<html><body style='font-size: 14px;'>" + head + "</body></html>");
         JLabel descriptionLabel = new JLabel("<html><body>" + description + "</body></html>");
 
         card.add(subject, "wrap");
@@ -71,6 +73,20 @@ public class BlogPanel extends JPanel {
 
         card.add(reedMore);
 
+        card.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                card.setBackground(new Color(78, 86, 101));
+                reedMore.setBackground(new Color(46, 52, 64));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                card.setBackground(new Color(46, 52, 64));
+                reedMore.setBackground(new Color(78, 86, 101));
+            }
+
+        });
 
         return card;
     }

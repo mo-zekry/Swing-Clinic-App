@@ -1,5 +1,6 @@
 package clinic.code;
 
+import helpers.ModernButton;
 import helpers.PaintImage;
 import net.miginfocom.swing.MigLayout;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
@@ -7,10 +8,9 @@ import org.kordamp.ikonli.swing.FontIcon;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
+import java.io.IOException;
+import java.net.URI;
 
 public class DoctorsPanel extends JPanel {
 
@@ -58,7 +58,6 @@ public class DoctorsPanel extends JPanel {
     }
 
     private JPanel createCard(String doctorName, String department, String description, ImageIcon image) {
-        // Create a JPanel with a border and a modern card layout
         JPanel card = new JPanel();
         card.setPreferredSize(new Dimension(300, 500));
 
@@ -73,6 +72,7 @@ public class DoctorsPanel extends JPanel {
         socialMediaIconsContainer.setBackground(new Color(255, 255, 255));
         socialMediaIconsContainer.setOpaque(true);
         socialMediaIconsContainer.setVisible(false);
+        socialMediaIconsContainer.setOpaque(true);
 
         FontIcon facebook = FontIcon.of(MaterialDesign.MDI_FACEBOOK);
         facebook.setIconColor(new Color(28, 102, 255));
@@ -82,6 +82,17 @@ public class DoctorsPanel extends JPanel {
         facebookIcon.setIcon(facebook);
         facebookIcon.setPreferredSize(new Dimension(40, 40));
         socialMediaIconsContainer.add(facebookIcon);
+        facebookIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        facebookIcon.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(URI.create("https://facebook.com/"));
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
 
         FontIcon twitter = FontIcon.of(MaterialDesign.MDI_TWITTER_CIRCLE);
         twitter.setIconColor(new Color(28, 102, 255));
@@ -91,6 +102,17 @@ public class DoctorsPanel extends JPanel {
         twitterIcon.setIcon(twitter);
         twitterIcon.setPreferredSize(new Dimension(40, 40));
         socialMediaIconsContainer.add(twitterIcon);
+        twitterIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        twitterIcon.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(URI.create("https://twitter.com/"));
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
 
         FontIcon instagram = FontIcon.of(MaterialDesign.MDI_INSTAGRAM);
         instagram.setIconColor(new Color(217, 108, 118));
@@ -100,6 +122,17 @@ public class DoctorsPanel extends JPanel {
         instagramIcon.setIcon(instagram);
         instagramIcon.setPreferredSize(new Dimension(40, 40));
         socialMediaIconsContainer.add(instagramIcon);
+        instagramIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        instagramIcon.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(URI.create("https://instagram.com/"));
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
 
         FontIcon google = FontIcon.of(MaterialDesign.MDI_GOOGLE_PLUS);
         google.setIconColor(new Color(217, 108, 118));
@@ -109,51 +142,55 @@ public class DoctorsPanel extends JPanel {
         googleIcon.setIcon(google);
         googleIcon.setPreferredSize(new Dimension(40, 40));
         socialMediaIconsContainer.add(googleIcon);
+        googleIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        googleIcon.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(URI.create("https://google.com/"));
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
 
         socialIconsImageContainer.add(doctorImage, BorderLayout.CENTER);
         socialIconsImageContainer.add(socialMediaIconsContainer, BorderLayout.SOUTH);
 
         JPanel nameAndDepartmentContainer = new JPanel(new GridLayout(2, 1, 5, 5));
 
-        JLabel doctorNameLabel = new JLabel(doctorName);
-        JLabel departmentNameLabel = new JLabel(department);
+        JLabel doctorNameLabel = new JLabel("<html><body style='font:15px;'>" + doctorName + "</body></html>");
+        JLabel departmentNameLabel = new JLabel("<html><body>" + department + "</body></html>");
 
         nameAndDepartmentContainer.add(doctorNameLabel);
         nameAndDepartmentContainer.add(departmentNameLabel);
 
         JPanel descriptionAndBtnContainer = new JPanel(new GridLayout(2, 1, 5, 5));
 
-        JTextPane descriptionArea = new JTextPane();
-        descriptionArea.setText(description);
-        descriptionArea.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
-        descriptionArea.setAlignmentY(JTextArea.CENTER_ALIGNMENT);
-        descriptionArea.setFont(new Font("Arial", Font.PLAIN, 14));
-        descriptionArea.setEditable(false);
-        descriptionArea.setPreferredSize(new Dimension(card.getPreferredSize().width, 20));
-        // descriptionArea.setWrapStyleWord(true);
-        // descriptionArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        JButton bookBtn = new JButton("Book Now"); // Update variable name to follow Java naming conventions
+        JLabel descriptionLabel = new JLabel("<html><body>" + description + "</body></html>");
 
-        descriptionAndBtnContainer.add(descriptionArea);
+        ModernButton bookBtn = new ModernButton("Book Now"); // Update variable name to follow Java naming conventions
+
+        descriptionAndBtnContainer.add(descriptionLabel);
         descriptionAndBtnContainer.add(bookBtn);
 
         card.add(socialIconsImageContainer, "wrap, growx, growy");
         card.add(nameAndDepartmentContainer, "wrap");
         card.add(descriptionAndBtnContainer);
 
-        card.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                // Implement mouse hover behavior if needed
-                socialMediaIconsContainer.setVisible(true);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                socialMediaIconsContainer.setVisible(false);
-                // Implement mouse exit behavior if needed
-            }
-        });
+//        card.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseEntered(MouseEvent e) {
+//                // Implement mouse hover behavior if needed
+//                socialMediaIconsContainer.setVisible(true);
+//            }
+//
+//            @Override
+//            public void mouseExited(MouseEvent e) {
+//                socialMediaIconsContainer.setVisible(false);
+//                // Implement mouse exit behavior if needed
+//            }
+//        });
 
 
         return card;

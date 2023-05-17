@@ -51,7 +51,6 @@ public class HomePanel extends JPanel {
         JPanel cardsPanel = new JPanel();
 
         cardsPanel.setLayout(new GridLayout(2, 2, 5, 5));
-        System.out.println(frame.getWidth());
         cardsPanel.add(card1);
         cardsPanel.add(card2);
         cardsPanel.add(card3);

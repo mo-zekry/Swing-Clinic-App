@@ -1,6 +1,10 @@
 package clinic.code;
 
 import com.github.lgooddatepicker.components.DatePicker;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jdesktop.swingx.JXDatePicker;
 
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
@@ -11,8 +15,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
-import java.util.Date;
+import java.io.IOException;
+import java.util.*;
 
 public class ContactPanel extends JPanel {
     JFrame frame;
@@ -74,12 +78,8 @@ public class ContactPanel extends JPanel {
 
         JLabel dateLabel = new JLabel("Date:");
         dateLabel.setFont(new Font("", Font.PLAIN, 18));
-
-//        JXDatePicker datePicker = new JXDatePicker();
-//        UIDefaults uiDefaults = UIManager.getDefaults();
-//        uiDefaults.put("JXMonthView.background", Color.LIGHT_GRAY); // Set background color of the date chooser menu
-
         DatePicker data = new DatePicker();
+        data.getComponentDateTextField().setBackground(new Color(59, 66, 82));
         data.setPreferredSize(new Dimension(400, 40));
         c.gridx = 0;
         c.gridy = 2;
@@ -99,9 +99,6 @@ public class ContactPanel extends JPanel {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
         timeModel.setValue(calendar.getTime());
-
-//        JTextField timeField = new JTextField();
-
         timeSpinner.setPreferredSize(new Dimension(400, 40));
         c.gridx = 0;
         c.gridy = 3;
@@ -112,7 +109,7 @@ public class ContactPanel extends JPanel {
 
         JLabel serviceLabel = new JLabel("Service Type:");
         serviceLabel.setFont(new Font("", Font.PLAIN, 18));
-        String[] serviceTypes = {"Type 1", "Type 2", "Type 3"};
+        String[] serviceTypes = {"Neurology", "Ophthalmology", "Nuclear Magnetic", "Surgical", "Cardiology", "X-ray", "Dental", "Traumatology", "Respiratory"};
         JComboBox<String> serviceComboBox = new JComboBox<>(serviceTypes);
         serviceComboBox.setFont(new Font("", Font.PLAIN, 18));
         c.gridx = 0;
@@ -154,6 +151,7 @@ public class ContactPanel extends JPanel {
         submitBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // access the form elements
                 String firstName = firstNameField.getText();
                 String lastName = lastNameField.getText();
                 String date = data.getText();
@@ -161,13 +159,7 @@ public class ContactPanel extends JPanel {
                 String serviceType = serviceComboBox.getSelectedItem().toString();
                 String gender = maleRadioButton.isSelected() ? "Male" : "Female";
 
-                // Perform actions with the form data
-                System.out.println("First Name: " + firstName);
-                System.out.println("Last Name: " + lastName);
-                System.out.println("Date: " + date);
-                System.out.println("Time: " + time);
-                System.out.println("Service Type: " + serviceType);
-                System.out.println("Gender: " + gender);
+
                 // Reset the form fields
                 firstNameField.setText("");
                 lastNameField.setText("");
@@ -191,7 +183,7 @@ public class ContactPanel extends JPanel {
         JPanel card = new JPanel(new BorderLayout());
 //        card.setBackground(Color.white);
         card.setBackground(new Color(59, 63, 79));
-        card.setBorder(BorderFactory.createLineBorder(Color.lightGray));
+        card.setBorder(BorderFactory.createLineBorder(new Color(87, 91, 108), 2, true));
         card.setPreferredSize(new Dimension(300, 100));
 
         // Panel for the rounded icon
