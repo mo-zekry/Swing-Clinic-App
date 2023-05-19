@@ -6,7 +6,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
-import helpers.HoverEffect;
 import net.miginfocom.swing.MigLayout;
 import org.kordamp.ikonli.medicons.Medicons;
 import org.kordamp.ikonli.swing.FontIcon;
@@ -93,22 +92,22 @@ public class DepartmentPanel extends JPanel {
         return card;
     }
 
-    private void hover(JPanel card, FontIcon icon){
-        card.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                icon.setIconColor(new Color(30, 165, 206));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                icon.setIconColor(Color.WHITE);
-            }
-
-        });
-
-
-    }
+//    private void hover(JPanel card, FontIcon icon){
+//        card.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseEntered(MouseEvent e) {
+//                icon.setIconColor(new Color(30, 165, 206));
+//            }
+//
+//            @Override
+//            public void mouseExited(MouseEvent e) {
+//                icon.setIconColor(Color.WHITE);
+//            }
+//
+//        });
+//
+//
+//    }
 
 
 }

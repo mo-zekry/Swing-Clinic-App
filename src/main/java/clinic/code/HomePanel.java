@@ -24,6 +24,7 @@ public class HomePanel extends JPanel {
 
         setLayout(new BorderLayout());
         setOpaque(true);
+
         setBorder(new EmptyBorder(10, 10, 10, 10));
         // ==========================================
         // Create four cards with service name and description
@@ -57,7 +58,9 @@ public class HomePanel extends JPanel {
         cardsPanel.add(card4);
 
         JScrollPane scrollPane = new JScrollPane(cardsPanel);
+
         JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();
+
         verticalScrollBar.setUnitIncrement(20);
         verticalScrollBar.setBlockIncrement(100);
 
@@ -77,10 +80,13 @@ public class HomePanel extends JPanel {
     private JPanel createCard(String serviceName, String serviceDescription, ImageIcon image) {
 
         JPanel card = new JPanel();
+
         JLabel serviceNameLabel = new JLabel(serviceName);
+
         JTextArea serviceDescriptionArea = new JTextArea(serviceDescription);
 
         PaintImage paintImage = new PaintImage(image.getImage());
+
         card.setLayout(new BorderLayout());
         card.addMouseListener(new MouseAdapter() {
             @Override
@@ -105,6 +111,7 @@ public class HomePanel extends JPanel {
         serviceNameLabel.setFont(new Font("Arial", Font.BOLD, 18));
         serviceNameLabel.setPreferredSize(new Dimension(0, 50));
         serviceNameLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
         card.add(serviceNameLabel, BorderLayout.NORTH);
 
         // creating image panel
@@ -119,11 +126,13 @@ public class HomePanel extends JPanel {
         serviceDescriptionArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         card.add(serviceDescriptionArea, BorderLayout.SOUTH);
+
         card.setBackground(new Color(59, 63, 79));
         card.setForeground(new Color(183, 183, 192));
         card.setPreferredSize(new Dimension(300, 400));
         serviceDescriptionArea.setForeground(new Color(183, 183, 192));
         serviceNameLabel.setForeground(new Color(183, 183, 192));
+
         return card;
     }
 

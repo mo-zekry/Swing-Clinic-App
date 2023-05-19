@@ -2,21 +2,29 @@ package clinic.code;
 
 import javax.swing.*;
 
+
 import net.miginfocom.swing.MigLayout;
 import org.kordamp.ikonli.elusive.Elusive;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 import org.kordamp.ikonli.swing.FontIcon;
 
 import java.awt.*;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class MyFrame extends JFrame {
 
     JPanel headerPanel;
-
     JPanel sideBar;
     private JPanel menuPanel;
+    HomePanel homePanel = new HomePanel(this);
+    DepartmentPanel departmentPanel = new DepartmentPanel(this);
+    DoctorsPanel doctorsPanel = new DoctorsPanel(this);
+    BlogPanel blogPanel = new BlogPanel();
+    AboutPanel aboutPanel = new AboutPanel(this);
+    ContactPanel contactPanel = new ContactPanel(this);
+    Developers developersPanel = new Developers(this);
     private JButton homeBtn;
     private JButton departmentBtn;
     private JButton doctorsBtn;
@@ -36,35 +44,48 @@ public class MyFrame extends JFrame {
 
     private void initComponent() {
 
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         this.setMinimumSize(new Dimension(1300, 750));
+
         this.setLayout(new BorderLayout());
 
         this.setLocationRelativeTo(null);
 
-        sideBar = new JPanel();
         //========================================
         headerPanel = new JPanel(new BorderLayout());
         headerPanel.setPreferredSize(new Dimension(80, 50));
         JLabel expandBtn = new JLabel();
+
         FontIcon menuIcon = FontIcon.of(MaterialDesign.MDI_MENU);
         menuIcon.setIconSize(40);
         menuIcon.setIconColor(new Color(255, 255, 255));
+
         expandBtn.setHorizontalAlignment(SwingConstants.CENTER);
+
         expandBtn.setBorder(BorderFactory.createEmptyBorder(0, 12, 0, 0));
+
         expandBtn.setFocusable(false);
+
         expandBtn.setIcon(menuIcon);
+
         expandBtn.setPreferredSize(new Dimension(50, 35));
+
         expandBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         headerPanel.add(expandBtn, BorderLayout.WEST);
         //===================================
+
         this.getContentPane().add(headerPanel, BorderLayout.NORTH);
 
+        sideBar = new JPanel();
         sideBar.setPreferredSize(new Dimension(70, 600));
         sideBar.setLayout(new BorderLayout());
         sideBar.setBackground(new Color(38, 55, 56));
+
         menuPanel = new JPanel();
-        menuPanel.setLayout(new MigLayout(" fillx, align center,aligny top "));
+
+        menuPanel.setLayout(new MigLayout("fillx, align center, aligny top "));
 
         homeBtn = new JButton();
         homeBtn.setFont(new Font("", Font.PLAIN, 18));
@@ -86,13 +107,34 @@ public class MyFrame extends JFrame {
 
         settingsPanel = new JPanel(new MigLayout(" fillx, align center"));
         settingsPanel.setPreferredSize(new Dimension(50, 20));
+
         settingsBtn = new JButton();
         settingsBtn.setFont(new Font("", Font.PLAIN, 18));
         settingsPanel.setPreferredSize(new Dimension(300, 100));
+
         settingsPanel.add(settingsBtn, "grow, hmax 50, hmin 50");
+
         sideBar.add(settingsPanel, BorderLayout.SOUTH);
 
-        iconSidebar();
+//        ActionListener themeButtonListener = new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                // Perform theme change action here
+//                try {
+//                    if (UIManager.getLookAndFeel() instanceof FlatNordIJTheme) {
+//                        UIManager.setLookAndFeel(new FlatCyanLightIJTheme());
+//                    } else {
+//                        UIManager.setLookAndFeel(new FlatNordIJTheme());
+//                    }
+//                    SwingUtilities.updateComponentTreeUI(MyFrame.this);
+//                } catch (Exception ex) {
+//                    System.err.println("Failed to change theme. Using fallback.");
+//                }
+//            }
+//        };
+//        settingsBtn.addActionListener(themeButtonListener);
+
+        iconSidebar(); // default sidebar icon
 
         expandBtn.addMouseListener(new MouseAdapter() {
             @Override
@@ -102,7 +144,6 @@ public class MyFrame extends JFrame {
                 } else {
                     iconSidebar();
                 }
-
             }
         });
 
@@ -112,6 +153,7 @@ public class MyFrame extends JFrame {
         menuPanel.add(doctorsBtn, "wrap, grow, align center, hmax 70, hmin 50");
         menuPanel.add(blogBtn, "wrap, grow, align center, hmax 70, hmin 50");
         menuPanel.add(contactBtn, "wrap, grow, align center, hmax 70, hmin 50");
+
         sideBar.add(menuPanel, BorderLayout.CENTER);
 
         // ============================================================================
@@ -119,12 +161,6 @@ public class MyFrame extends JFrame {
 
         contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        HomePanel homePanel = new HomePanel(this);
-        DepartmentPanel departmentPanel = new DepartmentPanel(this);
-        DoctorsPanel doctorsPanel = new DoctorsPanel(this);
-        BlogPanel blogPanel = new BlogPanel();
-        AboutPanel aboutPanel = new AboutPanel(this);
-        ContactPanel contactPanel = new ContactPanel(this);
 
         contentPanel.add(homePanel);
         contentPanel.add(departmentPanel);
@@ -132,75 +168,51 @@ public class MyFrame extends JFrame {
         contentPanel.add(blogPanel);
         contentPanel.add(aboutPanel);
         contentPanel.add(contactPanel);
+        contentPanel.add(developersPanel);
 
-        this.getContentPane().add(sideBar, BorderLayout.WEST);
-        this.getContentPane().add(contentPanel, BorderLayout.CENTER);
+        add(sideBar, BorderLayout.WEST);
+        add(contentPanel, BorderLayout.CENTER);
+
 
         homeBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                homePanel.setVisible(true);
-                departmentPanel.setVisible(false);
-                doctorsPanel.setVisible(false);
-                blogPanel.setVisible(false);
-                aboutPanel.setVisible(false);
-                contactPanel.setVisible(false);
+                setVisability(true, false, false, false, false, false, false);
             }
         });
         departmentBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                homePanel.setVisible(false);
-                departmentPanel.setVisible(true);
-                doctorsPanel.setVisible(false);
-                blogPanel.setVisible(false);
-                aboutPanel.setVisible(false);
-                contactPanel.setVisible(false);
+                setVisability(false, true, false, false, false, false, false);
             }
         });
         doctorsBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                homePanel.setVisible(false);
-                departmentPanel.setVisible(false);
-                doctorsPanel.setVisible(true);
-                blogPanel.setVisible(false);
-                aboutPanel.setVisible(false);
-                contactPanel.setVisible(false);
+                setVisability(false, false, true, false, false, false, false);
             }
         });
         blogBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                homePanel.setVisible(false);
-                departmentPanel.setVisible(false);
-                doctorsPanel.setVisible(false);
-                blogPanel.setVisible(true);
-                aboutPanel.setVisible(false);
-                contactPanel.setVisible(false);
+                setVisability(false, false, false, true, false, false, false);
             }
         });
         aboutBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                homePanel.setVisible(false);
-                departmentPanel.setVisible(false);
-                doctorsPanel.setVisible(false);
-                blogPanel.setVisible(false);
-                aboutPanel.setVisible(true);
-                contactPanel.setVisible(false);
+                setVisability(false, false, false, false, true, false, false);
             }
         });
         contactBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                homePanel.setVisible(false);
-                departmentPanel.setVisible(false);
-                doctorsPanel.setVisible(false);
-                blogPanel.setVisible(false);
-                aboutPanel.setVisible(false);
-                contactPanel.setVisible(true);
+                setVisability(false, false, false, false, false, true, false);
             }
+        });
+
+        settingsBtn.addActionListener(e -> {
+            setVisability(false, false, false, false, false, false, true);
         });
 
         this.setVisible(true);
@@ -208,7 +220,7 @@ public class MyFrame extends JFrame {
 
 
     private void iconSidebar() {
-        homeBtn.setText("");
+        homeBtn.setText(""); // remove the text
         FontIcon homeIcon = FontIcon.of(MaterialDesign.MDI_HOME, 40, new Color(198, 215, 231));
         homeBtn.setIcon(homeIcon);
 
@@ -263,6 +275,17 @@ public class MyFrame extends JFrame {
         settingsBtn.setIcon(null);
 
         sideBar.setPreferredSize(new Dimension(300, 600));
+    }
+
+    private void setVisability(boolean home, boolean department, boolean doctors, boolean blog, boolean about, boolean contact, boolean developers) {
+
+        homePanel.setVisible(home);
+        departmentPanel.setVisible(department);
+        doctorsPanel.setVisible(doctors);
+        blogPanel.setVisible(blog);
+        aboutPanel.setVisible(about);
+        contactPanel.setVisible(contact);
+        developersPanel.setVisible(developers);
     }
 
 }
