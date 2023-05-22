@@ -13,14 +13,21 @@ import java.awt.event.MouseEvent;
 import java.util.Objects;
 
 /**
- * The MyFrame class represents the main frame of the Clinic Appointment application.
- * It extends the JFrame class and provides the user interface for the application.
+ * The MyFrame class represents the main frame of the Clinic Appointment
+ * application.
+ * It extends the JFrame class and provides the user interface for the
+ * application.
  * The frame consists of a header panel, a sidebar, and a content panel.
- * It also includes buttons for navigating to different sections of the application, such as home, department, doctors, blog, about, and contact.
- * Additionally, there is a settings button for accessing the application's settings.
- * The content panel displays different panels based on the selected navigation button.
- * The class provides methods for configuring the visibility of panels and setting up the frame components.
- * Overall, the MyFrame class serves as the central component for the Clinic Appointment application's user interface.
+ * It also includes buttons for navigating to different sections of the
+ * application, such as home, department, doctors, blog, about, and contact.
+ * Additionally, there is a settings button for accessing the application's
+ * settings.
+ * The content panel displays different panels based on the selected navigation
+ * button.
+ * The class provides methods for configuring the visibility of panels and
+ * setting up the frame components.
+ * Overall, the MyFrame class serves as the central component for the Clinic
+ * Appointment application's user interface.
  */
 public class MyFrame extends JFrame {
 
@@ -34,7 +41,7 @@ public class MyFrame extends JFrame {
     private BlogPanel blogPanel = new BlogPanel();
     private AboutPanel aboutPanel = new AboutPanel(this);
     private ContactPanel contactPanel = new ContactPanel(this);
-    private Developers developersPanel = new Developers(this);
+//    private Developers developersPanel = new Developers(this);
 
     // Buttons
     private JButton homeBtn;
@@ -128,6 +135,11 @@ public class MyFrame extends JFrame {
 
         iconSidebar(); // default sidebar icon
 
+        /**
+         * Responds to a mouse click event by toggling the sidebar button.
+         *
+         * @param e the mouse event that triggered the function
+         */
         expandBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -148,7 +160,6 @@ public class MyFrame extends JFrame {
 
         sideBar.add(menuPanel, BorderLayout.CENTER);
 
-
         // Content panel
         contentPanel = new JPanel(new CardLayout());
         contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -160,7 +171,7 @@ public class MyFrame extends JFrame {
         contentPanel.add(blogPanel);
         contentPanel.add(aboutPanel);
         contentPanel.add(contactPanel);
-        contentPanel.add(developersPanel);
+//        contentPanel.add(developersPanel);
 
         // Add components to the frame
         add(headerPanel, BorderLayout.NORTH);
@@ -288,7 +299,8 @@ public class MyFrame extends JFrame {
      * @param contact    visibility of the contact panel
      * @param developers visibility of the developers panel
      */
-    private void setVisibility(boolean home, boolean department, boolean doctors, boolean blog, boolean about, boolean contact, boolean developers) {
+    private void setVisibility(boolean home, boolean department, boolean doctors, boolean blog, boolean about,
+            boolean contact, boolean developers) {
 
         homePanel.setVisible(home);
         departmentPanel.setVisible(department);
@@ -296,6 +308,6 @@ public class MyFrame extends JFrame {
         blogPanel.setVisible(blog);
         aboutPanel.setVisible(about);
         contactPanel.setVisible(contact);
-        developersPanel.setVisible(developers);
+//        developersPanel.setVisible(developers);
     }
 }

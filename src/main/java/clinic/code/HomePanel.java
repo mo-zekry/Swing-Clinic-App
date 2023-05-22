@@ -13,10 +13,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- * The  HomePanel class is a Swing panel that represents the home screen of a clinic application.
+ * The HomePanel class is a Swing panel that represents the home screen of a clinic application.
  * It features a welcome message, along with four cards showcasing different services provided by the clinic.
- * Each card displays a service name, a description, and an associated image. The panel dynamically adjusts the layout based on the window size, allowing for a responsive user interface.
- * The cards are interactive, changing color when hovered over. Overall, the HomePanel provides an engaging and informative introduction to the clinic application.
+ * Each card displays a service name, a description, and an associated image.
+ * The panel dynamically adjusts the layout based on the window size, allowing for a responsive user interface.
+ * The cards are interactive, changing color when hovered over.
+ * Overall, the HomePanel provides an engaging and informative introduction to the clinic application.
  */
 
 public class HomePanel extends JPanel {
@@ -26,6 +28,11 @@ public class HomePanel extends JPanel {
 
     JFrame frame;
 
+    /**
+     * Constructs a HomePanel object.
+     *
+     * @param frame the JFrame containing the panel
+     */
     public HomePanel(JFrame frame) {
         this.frame = frame;
 
@@ -33,7 +40,7 @@ public class HomePanel extends JPanel {
         setOpaque(true);
 
         setBorder(new EmptyBorder(10, 10, 10, 10));
-        // ==========================================
+
         // Create four cards with service name and description
         JPanel card1 = createCard("Emergency Services",
                 lorem,
@@ -53,7 +60,7 @@ public class HomePanel extends JPanel {
         label.setFont(new Font("Gotham", Font.BOLD, 25));
         welcomePanel.add(label, BorderLayout.CENTER);
         welcomePanel.add(new FoldingCube(), BorderLayout.EAST);
-        // ===================================================
+
         add(welcomePanel, BorderLayout.NORTH);
 
         JPanel cardsPanel = new JPanel();
@@ -84,6 +91,14 @@ public class HomePanel extends JPanel {
         });
     }
 
+    /**
+     * Creates a card panel with a service name, description, and image.
+     *
+     * @param serviceName        the name of the service
+     * @param serviceDescription the description of the service
+     * @param image              the ImageIcon associated with the service
+     * @return a JPanel representing the card
+     */
     private JPanel createCard(String serviceName, String serviceDescription, ImageIcon image) {
 
         JPanel card = new JPanel();

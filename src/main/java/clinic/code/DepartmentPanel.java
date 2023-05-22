@@ -1,14 +1,21 @@
 package clinic.code;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
 import net.miginfocom.swing.MigLayout;
 import org.kordamp.ikonli.medicons.Medicons;
 import org.kordamp.ikonli.swing.FontIcon;
+
+/**
+ * The DepartmentPanel class represents a Swing panel that displays various departments of a clinic.
+ * It utilizes a grid layout to arrange department cards, each containing an icon representing the department, a name label, and a description label.
+ * The panel includes a total of nine department cards, such as Neurology, Ophthalmology, Surgical, Cardiology, Dental, and others.
+ * The cards are designed with a consistent color scheme and font style, providing a visually appealing and informative interface.
+ * However, there are commented code sections related to mouse hover events that could potentially enhance the user experience.
+ * Overall, the DepartmentPanel offers a comprehensive overview of the clinic's departments in an organized and accessible manner.
+ * */
 
 public class DepartmentPanel extends JPanel {
     Image image;

@@ -57,6 +57,16 @@ public class DoctorsPanel extends JPanel {
         });
     }
 
+
+    /**
+     * Creates a doctor card panel.
+     *
+     * @param doctorName   the name of the doctor
+     * @param department   the department of the doctor
+     * @param description  the description of the doctor
+     * @param image        the image of the doctor
+     * @return the doctor card panel
+     */
     private JPanel createCard(String doctorName, String department, String description, ImageIcon image) {
         JPanel card = new JPanel();
         card.setPreferredSize(new Dimension(300, 500));
@@ -189,10 +199,8 @@ public class DoctorsPanel extends JPanel {
             @Override
             public void mouseExited(MouseEvent e) {
                 socialMediaIconsContainer.setVisible(false);
-                // Implement mouse exit behavior if needed
             }
         });
-
 
         return card;
     }

@@ -10,13 +10,10 @@ import javax.swing.*;
  * The main method initializes the theme, creates an instance of the MyFrame class (the main frame of the application), and launches the application.
  * It serves as the starting point for the Clinic Appointment application and handles the initialization of the user interface and theme configuration.
  */
-
 public class Main {
     /**
      * The main method of the application.
      * It initializes the look and theme, and creates an instance of MyFrame.
-     *
-     * @param args the command-line arguments (not used in this application)
      */
     public static void main(String[] args) {
         System.out.println("Initializing application...");

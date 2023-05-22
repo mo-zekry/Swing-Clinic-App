@@ -15,14 +15,14 @@ import java.awt.event.MouseEvent;
  * It consists of a header panel with a title and description, followed by a set of cards representing individual blog posts.
  * Each card contains an image, date, access information, message count, subject, description, and a "Read More" button.
  * The panel uses a MigLayout for layout management and provides a visually appealing interface for browsing and accessing blog content.
- * */
-
+ */
 public class BlogPanel extends JPanel {
     public BlogPanel() {
         setLayout(new BorderLayout());
 
+        // Header Panel
         JPanel head = new JPanel();
-        head.setLayout(new MigLayout(" fill"));
+        head.setLayout(new MigLayout("fill"));
 
         JLabel headLabel = new JLabel("<html><body style='text-align: center; font-size: 24; font-weight: 800;'> Gets Every Single Updates Here</body></html>");
         JLabel description = new JLabel("<html><body style='text-align: center; font-size: 15'> Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</body></html>");
@@ -31,9 +31,9 @@ public class BlogPanel extends JPanel {
         head.add(description, "align center");
 
         add(head, BorderLayout.NORTH);
-        //================================================
 
-        JPanel cardsPanel = new JPanel(new MigLayout(" fill"));
+        // Blog Cards Panel
+        JPanel cardsPanel = new JPanel(new MigLayout("fill"));
 
         cardsPanel.add(createCard(new ImageIcon("src/main/resources/img/blog_1.jpg"), "Scary Thing That You Don’t Get Enough Sleep", "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts."), "grow");
 
@@ -48,9 +48,16 @@ public class BlogPanel extends JPanel {
         cardsPanel.add(createCard(new ImageIcon("src/main/resources/img/blog_6.jpg"), "Scary Thing That You Don’t Get Enough Sleep", "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts."), "grow");
 
         add(cardsPanel, BorderLayout.CENTER);
-
     }
 
+        /**
+     * Creates a JPanel card containing an image, title, description, and a "Read More" button.
+     *
+     * @param  image        the ImageIcon to be displayed on the card
+     * @param  head         a String representing the card's title
+     * @param  description  a String representing the card's description
+     * @return              the JPanel card created with the given image, title, description, and button
+     */
     private JPanel createCard(ImageIcon image, String head, String description) {
         JPanel card = new JPanel(new MigLayout());
 
@@ -76,26 +83,24 @@ public class BlogPanel extends JPanel {
         card.add(subject, "wrap");
         card.add(descriptionLabel, "wrap");
 
-        JButton reedMore = new JButton("Reed More");
+        JButton readMore = new JButton("Read More");
 
-        card.add(reedMore);
+        card.add(readMore);
 
         card.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 card.setBackground(new Color(78, 86, 101));
-                reedMore.setBackground(new Color(46, 52, 64));
+                readMore.setBackground(new Color(46, 52, 64));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 card.setBackground(new Color(46, 52, 64));
-                reedMore.setBackground(new Color(78, 86, 101));
+                readMore.setBackground(new Color(78, 86, 101));
             }
-
         });
 
         return card;
     }
-
 }

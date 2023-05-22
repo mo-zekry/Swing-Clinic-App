@@ -1,6 +1,8 @@
 package clinic.code;
 
 import com.github.lgooddatepicker.components.DatePicker;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
 import net.miginfocom.swing.MigLayout;
@@ -9,8 +11,14 @@ import org.kordamp.ikonli.swing.FontIcon;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -24,19 +32,47 @@ import java.util.*;
 
 public class ContactPanel extends JPanel {
     JFrame frame;
+    Workbook workbook;
+
+    private void initializeWorkbook() {
+        File file = new File("form_data_java.xlsx");
+
+        if (file.exists()) {
+            try (FileInputStream fileInputStream = new FileInputStream(file)) {
+                workbook = new XSSFWorkbook(fileInputStream);
+               Sheet sheet = workbook.getSheetAt(0);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            workbook = new XSSFWorkbook();
+            Sheet sheet = workbook.createSheet("Form Data");
+
+            // Create the main row with column headers
+            Row headerRow = sheet.createRow(0);
+            String[] headers = {"First Name", "Last Name", "Email", "Date", "Time", "Service Type", "Gender"};
+            for (int i = 0; i < headers.length; i++) {
+                Cell cell = headerRow.createCell(i);
+                cell.setCellValue(headers[i]);
+            }
+        }
+    }
+
 
     public ContactPanel(JFrame frame) {
         this.frame = frame;
 
+        initializeWorkbook();
+
         setLayout(new BorderLayout());
 
         JPanel headerPanel = new JPanel(new BorderLayout());
-        JLabel title = new JLabel("<html><body style='text-align: center;font-size: 30; background-color: #333; color: #fff; padding: 10px; font-family: 'Helvetica', sans-serif; text-transform: uppercase; letter-spacing: 2px;'>CONTACT US</body></html>");
+        JLabel title = new JLabel("<html><body><h1>CONTACT US</h1></body></html>");
         title.setHorizontalAlignment(SwingConstants.CENTER);
         headerPanel.add(title, BorderLayout.CENTER);
         //======================================================
 
-        JPanel container = new JPanel(new MigLayout("fill, debug"));
+        JPanel container = new JPanel(new MigLayout("fill"));
 
         JPanel contactWays = new JPanel(new MigLayout("align center, gap 30 20"));
         contactWays.setPreferredSize(new Dimension(500, 210));
@@ -221,10 +257,33 @@ public class ContactPanel extends JPanel {
                 } else if (!isValidEmail) {
                     JOptionPane.showMessageDialog(null, "Invalid email address", "Error", JOptionPane.ERROR_MESSAGE);
                     return; // exit the event
+                }else {
+                    JOptionPane.showMessageDialog(null, "Registration Complete Successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
                 }
+
+                // Write the form data to the Excel file
+                Sheet sheet = workbook.getSheet("Form Data");
+                int lastRowNum = sheet.getLastRowNum();
+                Row dataRow = sheet.createRow(lastRowNum + 1);
+
+                dataRow.createCell(0).setCellValue(firstName);
+                dataRow.createCell(1).setCellValue(lastName);
+                dataRow.createCell(2).setCellValue(email);
+                dataRow.createCell(3).setCellValue(date);
+                dataRow.createCell(4).setCellValue(time);
+                dataRow.createCell(5).setCellValue(serviceType);
+                dataRow.createCell(6).setCellValue(gender);
 
                 // Reset the form fields
                 clearFields();
+
+                // Write the workbook to a file
+                try (FileOutputStream fos = new FileOutputStream("form_data_java.xlsx")) {
+                    workbook.write(fos);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
             }
 
             private void clearFields() {
