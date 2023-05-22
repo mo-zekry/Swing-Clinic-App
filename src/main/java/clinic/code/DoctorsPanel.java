@@ -12,6 +12,13 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.net.URI;
 
+/*
+ *The `DoctorsPanel` class is a custom JPanel that displays information about doctors in a clinic. It creates a panel with a grid layout to accommodate multiple doctor cards.
+ * Each card includes the doctor's name, department, description, and an image.
+ * It also provides social media icons for Facebook, Twitter, Instagram, and Google+, allowing users to connect with the doctors.
+ * The panel dynamically adjusts the layout based on the window size and provides a scrollable view if needed. The `DoctorsPanel` class serves as a reusable component for displaying and interacting with doctor information in the clinic application.
+ * */
+
 
 public class DoctorsPanel extends JPanel {
 
@@ -24,21 +31,13 @@ public class DoctorsPanel extends JPanel {
 
         JPanel cardsPanel = new JPanel(new GridLayout(2, 2, 5, 5));
 
-        cardsPanel.add(createCard("Dr. Lloyd Wilson", "NEUROLOGIST",
-                "I am an ambitious workaholic, but apart from that, pretty simple pers",
-                new ImageIcon("src/main/resources/img/doc_1.jpg")));
+        cardsPanel.add(createCard("Dr. Lloyd Wilson", "NEUROLOGIST", "I am an ambitious workaholic, but apart from that, pretty simple pers", new ImageIcon("src/main/resources/img/doc_1.jpg")));
 
-        cardsPanel.add(createCard("Dr. Lloyd Wilson", "NEUROLOGIST",
-                "I am an ambitious workaholic, but apart from that, pretty simple pers",
-                new ImageIcon("src/main/resources/img/doc_2.jpg")));
+        cardsPanel.add(createCard("Dr. Lloyd Wilson", "NEUROLOGIST", "I am an ambitious workaholic, but apart from that, pretty simple pers", new ImageIcon("src/main/resources/img/doc_2.jpg")));
 
-        cardsPanel.add(createCard("Dr. Lloyd Wilson", "NEUROLOGIST",
-                "I am an ambitious workaholic, but apart from that, pretty simple pers",
-                new ImageIcon("src/main/resources/img/doc_3.jpg")));
+        cardsPanel.add(createCard("Dr. Lloyd Wilson", "NEUROLOGIST", "I am an ambitious workaholic, but apart from that, pretty simple pers", new ImageIcon("src/main/resources/img/doc_3.jpg")));
 
-        cardsPanel.add(createCard("Dr. Lloyd Wilson", "NEUROLOGIST",
-                "I am an ambitious workaholic, but apart from that, pretty simple pers",
-                new ImageIcon("src/main/resources/img/doc_4.jpg")));
+        cardsPanel.add(createCard("Dr. Lloyd Wilson", "NEUROLOGIST", "I am an ambitious workaholic, but apart from that, pretty simple pers", new ImageIcon("src/main/resources/img/doc_4.jpg")));
 
         JScrollPane scrollPane = new JScrollPane(cardsPanel);
         JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();
@@ -85,16 +84,16 @@ public class DoctorsPanel extends JPanel {
         socialMediaIconsContainer.add(facebookLabel);
         facebookLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-//        facebookLabel.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                try {
-//                    Desktop.getDesktop().browse(URI.create("https://facebook.com/"));
-//                } catch (IOException ex) {
-//                    throw new RuntimeException(ex);
-//                }
-//            }
-//        });
+        facebookLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(URI.create("https://facebook.com/"));
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
 
         FontIcon twitter = FontIcon.of(MaterialDesign.MDI_TWITTER_CIRCLE);
         twitter.setIconColor(new Color(28, 102, 255));
@@ -105,16 +104,16 @@ public class DoctorsPanel extends JPanel {
         twitterIcon.setPreferredSize(new Dimension(40, 40));
         socialMediaIconsContainer.add(twitterIcon);
         twitterIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
-//        twitterIcon.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                try {
-//                    Desktop.getDesktop().browse(URI.create("https://twitter.com/"));
-//                } catch (IOException ex) {
-//                    throw new RuntimeException(ex);
-//                }
-//            }
-//        });
+        twitterIcon.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(URI.create("https://twitter.com/"));
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
 
         FontIcon instagram = FontIcon.of(MaterialDesign.MDI_INSTAGRAM);
         instagram.setIconColor(new Color(217, 108, 118));
@@ -125,16 +124,16 @@ public class DoctorsPanel extends JPanel {
         instagramIcon.setPreferredSize(new Dimension(40, 40));
         socialMediaIconsContainer.add(instagramIcon);
         instagramIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
-//        instagramIcon.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                try {
-//                    Desktop.getDesktop().browse(URI.create("https://instagram.com/"));
-//                } catch (IOException ex) {
-//                    throw new RuntimeException(ex);
-//                }
-//            }
-//        });
+        instagramIcon.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(URI.create("https://instagram.com/"));
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
 
         FontIcon google = FontIcon.of(MaterialDesign.MDI_GOOGLE_PLUS);
         google.setIconColor(new Color(217, 108, 118));
@@ -145,16 +144,16 @@ public class DoctorsPanel extends JPanel {
         googleIcon.setPreferredSize(new Dimension(40, 40));
         socialMediaIconsContainer.add(googleIcon);
         googleIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
-//        googleIcon.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                try {
-//                    Desktop.getDesktop().browse(URI.create("https://google.com/"));
-//                } catch (IOException ex) {
-//                    throw new RuntimeException(ex);
-//                }
-//            }
-//        });
+        googleIcon.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(URI.create("https://google.com/"));
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
 
         socialIconsImageContainer.add(doctorImage, BorderLayout.CENTER);
         socialIconsImageContainer.add(socialMediaIconsContainer, BorderLayout.SOUTH);

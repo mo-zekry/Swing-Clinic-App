@@ -13,6 +13,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 
+/**
+ * The ContactPanel class is a Swing panel that combines a contact form and contact information.
+ * It includes a header panel with a stylized "CONTACT US" title.
+ * The container panel holds the form and contact information side by side.
+ * The form has fields for first name, last name, email, date, time, service type, and gender.
+ * The submit button triggers form validation and clearing.
+ * The contact information section displays cards with icons, titles, and descriptions for address, contact number, email address, and website.
+ */
+
 public class ContactPanel extends JPanel {
     JFrame frame;
 

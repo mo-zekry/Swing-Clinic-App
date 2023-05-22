@@ -12,6 +12,13 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * The  HomePanel class is a Swing panel that represents the home screen of a clinic application.
+ * It features a welcome message, along with four cards showcasing different services provided by the clinic.
+ * Each card displays a service name, a description, and an associated image. The panel dynamically adjusts the layout based on the window size, allowing for a responsive user interface.
+ * The cards are interactive, changing color when hovered over. Overall, the HomePanel provides an engaging and informative introduction to the clinic application.
+ */
+
 public class HomePanel extends JPanel {
     String lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
             "Praesent tincidunt justo sed luctus bibendum." +

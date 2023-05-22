@@ -10,6 +10,13 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * The `BlogPanel` class is a Swing panel that displays a collection of blog posts.
+ * It consists of a header panel with a title and description, followed by a set of cards representing individual blog posts.
+ * Each card contains an image, date, access information, message count, subject, description, and a "Read More" button.
+ * The panel uses a MigLayout for layout management and provides a visually appealing interface for browsing and accessing blog content.
+ * */
+
 public class BlogPanel extends JPanel {
     public BlogPanel() {
         setLayout(new BorderLayout());
